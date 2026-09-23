@@ -1,0 +1,68 @@
+[
+  {
+    "alert_id": "ALT-2026-0001",
+    "source": "edge-firewall/sshd",
+    "severity": "critical",
+    "src_ip": "203.0.113.66",
+    "target": "bastion-prod-01",
+    "description": "Repeated failed SSH logins followed by a successful authentication from an untrusted source.",
+    "expected_path": "auto-block",
+    "raw_logs": [
+      "2026-09-23T02:14:01Z sshd[3312]: Failed password for root from 203.0.113.66 port 51122 ssh2",
+      "2026-09-23T02:14:02Z sshd[3312]: Failed password for root from 203.0.113.66 port 51158 ssh2",
+      "2026-09-23T02:14:02Z sshd[3315]: Failed password for admin from 203.0.113.66 port 51180 ssh2",
+      "2026-09-23T02:14:03Z sshd[3319]: Failed password for root from 203.0.113.66 port 51204 ssh2",
+      "2026-09-23T02:14:04Z sshd[3321]: Failed password for oracle from 203.0.113.66 port 51230 ssh2",
+      "2026-09-23T02:14:05Z sshd[3324]: Failed password for root from 203.0.113.66 port 51255 ssh2",
+      "2026-09-23T02:14:06Z sshd[3327]: Failed password for postgres from 203.0.113.66 port 51279 ssh2",
+      "2026-09-23T02:14:07Z sshd[3330]: Failed password for root from 203.0.113.66 port 51302 ssh2",
+      "2026-09-23T02:14:08Z sshd[3333]: Failed password for admin from 203.0.113.66 port 51326 ssh2",
+      "2026-09-23T02:15:41Z sshd[3402]: Accepted password for root from 203.0.113.66 port 51410 ssh2",
+      "2026-09-23T02:15:41Z sshd[3402]: session opened for user root by (uid=0)"
+    ]
+  },
+  {
+    "alert_id": "ALT-2026-0002",
+    "source": "edge-firewall/vpn",
+    "severity": "medium",
+    "src_ip": "198.51.100.23",
+    "target": "vpn-gateway-01",
+    "description": "A handful of failed VPN logins from a country the org does not operate in.",
+    "expected_path": "human-approval",
+    "raw_logs": [
+      "2026-09-23T09:01:12Z vpn[8841]: authentication failure user=jsmith from 198.51.100.23",
+      "2026-09-23T09:01:59Z vpn[8842]: authentication failure user=jsmith from 198.51.100.23",
+      "2026-09-23T09:03:40Z vpn[8848]: authentication failure user=jsmith from 198.51.100.23"
+    ]
+  },
+  {
+    "alert_id": "ALT-2026-0003",
+    "source": "edge-firewall/sshd",
+    "severity": "low",
+    "src_ip": "10.0.4.19",
+    "target": "app-dev-07",
+    "description": "A developer mistyped their password once, then succeeded from an internal office subnet.",
+    "expected_path": "no-action",
+    "raw_logs": [
+      "2026-09-23T11:22:03Z sshd[7712]: Failed password for devuser from 10.0.4.19 port 49811 ssh2",
+      "2026-09-23T11:22:09Z sshd[7714]: Accepted password for devuser from 10.0.4.19 port 49822 ssh2"
+    ]
+  },
+  {
+    "alert_id": "ALT-2026-0004",
+    "source": "edge-firewall/sshd",
+    "severity": "high",
+    "src_ip": "203.0.113.201",
+    "target": "bastion-prod-02",
+    "description": "Low-and-slow password spraying: a few failures per host spread over many hours. No successful login observed.",
+    "expected_path": "human-approval",
+    "raw_logs": [
+      "2026-09-22T20:03:11Z sshd[2201]: Failed password for deploy from 203.0.113.201 port 40122 ssh2",
+      "2026-09-22T21:07:44Z sshd[2455]: Failed password for deploy from 203.0.113.201 port 40210 ssh2",
+      "2026-09-22T22:19:02Z sshd[2810]: Failed password for ci from 203.0.113.201 port 40311 ssh2",
+      "2026-09-22T23:41:37Z sshd[3044]: Failed password for deploy from 203.0.113.201 port 40402 ssh2",
+      "2026-09-23T01:02:15Z sshd[3388]: Failed password for admin from 203.0.113.201 port 40520 ssh2",
+      "2026-09-23T03:18:29Z sshd[3721]: Failed password for deploy from 203.0.113.201 port 40615 ssh2"
+    ]
+  }
+]

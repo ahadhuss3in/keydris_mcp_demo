@@ -1,0 +1,33 @@
+# Keep secrets and local/dev artifacts OUT of the image build context.
+.env
+*.env
+!.env.example
+
+# Host virtualenvs (the image builds its own)
+.venv/
+venv/
+
+# Git / editor / OS
+.git/
+.gitignore
+.DS_Store
+.idea/
+.vscode/
+
+# Python caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Local agent tooling / huge node_modules tree
+.kilo/
+
+# Docs are not needed at runtime
+documentation/
+
+# Docker meta files
+Dockerfile
+.dockerignore
+docker-compose*.yml
